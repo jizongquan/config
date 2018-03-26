@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="../resert.css"/>
+    <script src="../jquery.js"></script>
+    <style>
+        .yhq-rg-lun {
+            width: 870px;
+            margin: 50px auto 0;
+            height: 388px;
+            position: relative;
+            overflow: hidden;
+        }
+        .yha-lun-nei{
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 388px;
+        }
+        .yha-lun-nei li{
+            width: 870px;
+            float: left;
+            height: 388px;
+        }
+        .yha-lun-nei li a{
+            display: block;
+            width: 100%;
+        }
+        .zy-btn {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 157px;
+            height: 0px;
+        }
+        .zuo-left {
+            float: left;
+            width: 44px;
+            height: 88px;
+            background: #000;
+        }
+        .you-right {
+            float: right;
+            width: 44px;
+            height: 88px;
+            background: #000;
+        }
+
+        .click-list {
+            position: absolute;
+            width: 838px;
+            padding-right: 32px;
+            text-align: right;
+            height: 10px;
+            bottom: 14px;
+        }
+        .click-list li {
+            cursor: pointer;
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: #fff;
+            border-radius: 50%;
+            margin-left: 10px;
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+            opacity: 0.3;
+        }
+        .click-list .cur-lk{
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+            opacity:1;
+        }
+
+    </style>
+</head>
+<body>
+<div class="yhq-rg-lun">
+    <ul class="yha-lun-nei clearfix" style="width: 3480px; left: 0px;">
+        <li>
+            <a href="javascript:;">
+                <img src="//img30.360buyimg.com/jr_image/jfs/t3871/234/2441425310/504479/4054cdf9/58aa9e28N74897500.png" alt="">
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;">
+                <img src="//img30.360buyimg.com/jr_image/jfs/t3871/234/2441425310/504479/4054cdf9/58aa9e28N74897500.png" alt="">
+            </a>
+        </li>
+        <li class="first-active">
+            <a href="javascript:;">
+                <img src="//img30.360buyimg.com/jr_image/jfs/t3871/234/2441425310/504479/4054cdf9/58aa9e28N74897500.png" alt="">
+            </a>
+        </li><li>
+        <a href="javascript:;">
+            <img src="//img30.360buyimg.com/jr_image/jfs/t3871/234/2441425310/504479/4054cdf9/58aa9e28N74897500.png" alt="">
+        </a>
+    </li></ul>
+    <div class="zy-btn clearfix">
+        <a href="javascript:;" class="zuo-left"></a>
+        <a href="javascript:;" class="you-right"></a>
+    </div>
+    <ul class="click-list">
+        <li class="cur-lk"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+
+
+<script>
+
+    fadeImg({
+        oContainer : $('.yhq-rg-lun'),
+        oContent : $('.yha-lun-nei'),
+        oArrowLeft : $('.zuo-left'),
+        oArrowRight : $('.you-right'),
+        oTabs : $('.click-list')
+    });
+    function fadeImg(opt){
+        var oContainer = opt.oContainer;
+        var oContent = opt.oContent;
+        var aDivs = oContent.find('li');
+        var iLength = aDivs.length;
+        var oneWidth = aDivs.width();
+        var oArrowLeft = opt.oArrowLeft;
+        var oArrowRight = opt.oArrowRight;
+        var oTabs = opt.oTabs;
+        var index = 0;
+        var timer;
+        var MaxIndex = oContent.find('li').length - 1;
+        aDivs.each(function(){
+            $(this).data('index',$(this).index());
+        });
+        oContent.css({
+            width : iLength*oneWidth
+        });
+        function goLeft(idx){
+            oContent.stop().animate({
+                'left' : -oneWidth
+            },function(){
+                oContent.css({left : 0}).find('li').eq(0).appendTo(oContent);
+                oTabs.find('li').eq(idx).addClass('cur-lk').siblings().removeClass('cur-lk')
+            });
+        }
+        function goRight(idx){
+            oContent.css({left : -oneWidth}).find('li').eq(iLength - 1).prependTo(oContent);
+            oContent.stop().animate({
+                'left' : 0
+            },function(){
+                oTabs.find('li').eq(idx).addClass('cur-lk').siblings().removeClass('cur-lk')
+            });
+        }
+        function start(){
+            timer = setInterval(function(){
+                oArrowRight.trigger('click');
+            },4000);
+        }
+        oArrowLeft.on('click',function(){
+            if(!oContent.is(":animated")){
+                index--;
+                if(index < 0){
+                    index = iLength - 1;
+                }
+                goRight(index);
+            }
+        });
+        oArrowRight.on('click',function(){
+            if(!oContent.is(":animated")) {
+                index++;
+                if(index >= iLength){
+                    index = 0;
+                }
+                goLeft(index);
+            }
+        });
+        oTabs.find('li').on('click',function(){
+            var $this = $(this),
+                    idx = 0;
+            index = $this.index();
+            if($this.hasClass('cur-lk')){
+                return;
+            }
+            oContent.find('li').each(function(){
+                if($(this).data('index') == index){
+                    idx = $(this).index();
+                    return;
+                }
+            });
+            oContent.stop().animate({
+                left : -idx * oneWidth
+            },function(){
+                oContent.css({
+                    left : 0
+                }).find('li').eq(idx).prevAll().appendTo(oContent);
+                $this.addClass('cur-lk').siblings().removeClass('cur-lk');
+            });
+        });
+        oContent.hover(function(){
+            clearInterval(timer);
+        },function(){
+            start();
+        });
+        oArrowLeft.hover(function(){
+            clearInterval(timer);
+        },function(){
+            start();
+        });
+        oArrowRight.hover(function(){
+            clearInterval(timer);
+        },function(){
+            start();
+        });
+        oTabs.hover(function(){
+            clearInterval(timer);
+        },function(){
+            start();
+        });
+        start();
+    }
+
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,4 @@
+config.rb;gulpfile.js和项目放在同级目录
+package.json 放在根级目录
+
+watchers和settings放在webstorm10的配置项里

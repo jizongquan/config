@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="../resert.css"/>
+    <script src="../jquery.js"></script>
+    <style>
+        body{
+            background: #000;
+        }
+        .clock {
+            margin: 15px auto 0;
+            background: url("//img30.360buyimg.com/jr_image/jfs/t18460/115/824568024/919/fac135ed/5aaa1dffN4e03a423.png") no-repeat;
+            width: 31px;
+            height: 26px;
+        }
+        .shake-doub {
+            -webkit-transform-origin: top bottom;
+            -ms-transform-origin: top bottom;
+            transform-origin: top bottom;
+            -webkit-animation-name: shake-opacitys;
+            -ms-animation-name: shake-opacitys;
+            animation-name: shake-opacitys;
+            -webkit-animation-duration: 500ms;
+            -ms-animation-duration: 500ms;
+            animation-duration: 500ms;
+            -webkit-animation-iteration-count: infinite;
+            -ms-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+            -webkit-animation-timing-function: ease-in-out;
+            -ms-animation-timing-function: ease-in-out;
+            animation-timing-function: ease-in-out;
+            -webkit-animation-delay: 0s;
+            -ms-animation-delay: 0s;
+            animation-delay: 0s;
+            -webkit-animation-play-state: running;
+            -ms-animation-play-state: running;
+            animation-play-state: running;
+        }
+
+
+        @-webkit-keyframes shake-opacitys { 0% { transform: rotate(0deg); }
+            10% { transform: rotate(-2.5deg); }
+            20% { transform: rotate(1.5deg); }
+            30% { transform: rotate(-3.5deg); }
+            40% { transform: rotate(1.5deg); }
+            50% { transform: rotate(-3.5deg); }
+            60% { transform: rotate(1.5deg); }
+            70% { transform: rotate(-3.5deg); }
+            80% { transform: rotate(1.5deg); }
+            90% { transform: rotate(-3.5deg); }
+            100% { transform: rotate(0deg); } }
+        @-ms-keyframes shake-opacitys { 0% { transform: rotate(0deg); }
+            10% { transform: rotate(-2.5deg); }
+            20% { transform: rotate(1.5deg); }
+            30% { transform: rotate(-3.5deg); }
+            40% { transform: rotate(1.5deg); }
+            50% { transform: rotate(-3.5deg); }
+            60% { transform: rotate(1.5deg); }
+            70% { transform: rotate(-3.5deg); }
+            80% { transform: rotate(1.5deg); }
+            90% { transform: rotate(-3.5deg); }
+            100% { transform: rotate(0deg); } }
+        @keyframes shake-opacitys { 0% { transform: rotate(0deg); }
+            10% { transform: rotate(-2.5deg); }
+            20% { transform: rotate(1.5deg); }
+            30% { transform: rotate(-3.5deg); }
+            40% { transform: rotate(1.5deg); }
+            50% { transform: rotate(-3.5deg); }
+            60% { transform: rotate(1.5deg); }
+            70% { transform: rotate(-3.5deg); }
+            80% { transform: rotate(1.5deg); }
+            90% { transform: rotate(-3.5deg); }
+            100% { transform: rotate(0deg); } }
+    </style>
+</head>
+<body>
+<div class="clock shake-doub"></div>
+</body>
+</html>

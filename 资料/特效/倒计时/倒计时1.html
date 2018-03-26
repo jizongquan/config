@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="../resert.css"/>
+    <script src="../jquery.js"></script>
+</head>
+<body>
+<!--data-time传入时间-->
+
+<div class="new-start" data-time="2017/03/23 21:55:00">
+    <span class="sma-text">剩余</span>
+    <span class="hour"></span>
+    <span class="sma-text">小时</span>
+    <span class="minute"></span>
+    <span class="sma-text">分钟</span>
+    <span class="second"></span>
+    <span class="sma-text">秒开抢</span>
+</div>
+
+<div class="new-start" data-time="2017/03/23 21:58:00">
+    <span class="sma-text">剩余</span>
+    <span class="hour"></span>
+    <span class="sma-text">小时</span>
+    <span class="minute"></span>
+    <span class="sma-text">分钟</span>
+    <span class="second"></span>
+    <span class="sma-text">秒开抢</span>
+</div>
+
+
+
+<!--<input type="hidden" id="couponTimeStart0" value="2017/03/23 21:55:00"/>-->
+
+<!--目标时间-->
+<input type="hidden" id="timeNow" value="2017/03/23 21:54:00"/>
+
+
+<script>
+        var timeNow=$("#timeNow").val(),
+            beginTime = new Date(timeNow),
+            NowTime = +beginTime,
+            startTime = +new Date(),
+            diffTime;
+            setInterval(getRTime,1000);
+            function getRTime(){
+                diffTime = +new Date() - startTime;
+                NowTime = new Date(+beginTime + diffTime);
+                var lTime1 = $(".new-start");
+                lTime1.each(function(){
+                    couponTimeStart0 = $(this).data("time");
+                    endTime = new Date(couponTimeStart0);
+                    t =endTime.getTime() - NowTime.getTime();
+                    var th1 = $(this).find(".hour");
+                    var tm1 = $(this).find(".minute");
+                    var ts1 = $(this).find(".second");
+                    var h1=Math.floor(t/1000/60/60%24);
+                    var m1=Math.floor(t/1000/60%60);
+                    var s1=Math.floor(t/1000%60);
+                    if(t>0){
+                        th1.html(h1);
+                        tm1.html(m1);
+                        ts1.html(s1);
+                    }else{
+                        th1.html(0);
+                        tm1.html(0);
+                        ts1.html(0);
+                    }
+                });
+            }
+</script>
+</body>
+</html>

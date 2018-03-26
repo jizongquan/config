@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="../resert.css"/>
+    <script src="../jquery.js"></script>
+    <style>
+        .er-yzm {
+            display: block;
+            float: left;
+            padding: 0 23px;
+            border: 1px solid #ccc;
+            height: 38px;
+            font-size: 14px;
+            color: #666;
+            font-family: "Microsoft Yahei";
+            margin-left: 10px;
+            line-height: 38px;
+            background: #f9f9f9;
+        }
+        .countDown {
+            pointer-events: none!important;
+            color: #a5a5a5!important;
+            cursor: default
+        }
+    </style>
+</head>
+<body>
+
+<a href="javascript:;" class="er-yzm">重新发送</a>
+<script>
+    /*倒计时*/
+    function countDown(opt){
+        var timer;
+        var time = opt.time || 2000;//多少毫秒后执行操作
+        var timeCallBack = opt.timeCallBack || function(){};//每个一秒钟执行的函数
+        var finalyCallBack = opt.finalyCallBack || function(){};//time后执行的函数
+        time = time / 1000;
+        timer = setInterval(function(){
+            if(time >= 1){
+                time -= 1;
+                timeCallBack(time);
+            }else{
+                clearInterval(timer);
+                finalyCallBack();
+            }
+        },1000)
+    };
+    $('.er-yzm').on("click",function(){
+        var _this = $(this);
+        countDown({
+            time:3000,
+            timeCallBack : function(time){
+                var str = time +'秒后重新获取';
+                _this.addClass("countDown");
+                _this.empty().html(str);
+            },
+
+            /*倒计时结束时执行的回调*/
+            finalyCallBack : function(){
+                _this.removeClass("countDown");
+                var strs = '重新发送';
+                _this.empty().html(strs);
+            }
+        })
+    })
+
+</script>
+</body>
+</html>

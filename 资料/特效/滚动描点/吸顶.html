@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    //目标高度
+    var oTop = $(".products").offset().top;
+    var sTop = 0;
+    $(window).scroll(function(){
+        sTop = $(this).scrollTop();
+        if(sTop >= oTop){
+            $(".products").addClass("pro-fixed");
+        }else{
+            $(".products").removeClass("pro-fixed");
+        }
+    });
+
+</script>
+
+</body>
+</html>

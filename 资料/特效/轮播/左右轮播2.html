@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="../resert.css"/>
+    <script src="../jquery.js"></script>
+    <style>
+        .Con-main {
+            width: 810px;
+            height: 350px;
+            position: relative;
+            overflow: hidden;
+            margin: 50px auto 0;
+        }
+        .Con-ul {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 350px;
+            overflow: hidden;
+        }
+        .Con-ul li {
+            float: left;
+            width: 810px;
+            height: 350px;
+        }
+        .Con-ul li a{
+            display: block;
+            width: 100%;
+        }
+        .Con-patten-btn{
+            position: absolute;
+            width: 100%;
+            height: 0;
+            top: 150px;
+            left: 0;
+        }
+        .Con-pat-left {
+            float: left;
+            width: 60px;
+            height: 40px;
+            background: #000;
+        }
+        .Con-pat-right {
+            background: #000;
+            float: right;
+            width: 60px;
+            height: 40px;
+        }
+        .Con-mt-num {
+            position: absolute;
+            right: 30px;
+            bottom: 25px;
+            font-size: 18px;
+            color: #fff;
+            font-family: "Microsoft Yahei";
+        }
+    </style>
+</head>
+<body>
+
+<div class="Con-main">
+    <ul class="Con-ul clearfix">
+        <li>
+            <a href="javascript:;">
+                <img src="//img30.360buyimg.com/jr_image/jfs/t14764/333/2527813087/360844/6bb3c1/5aa77489Nfdaab5de.png" alt="">
+            </a>
+        </li><li>
+        <a href="javascript:;">
+            <img src="//img30.360buyimg.com/jr_image/jfs/t19516/223/781144421/591637/1270f136/5aa783b5N0b99c2cc.png" alt="">
+        </a>
+    </li><li>
+        <a href="javascript:;">
+            <img src="//img30.360buyimg.com/jr_image/jfs/t14764/333/2527813087/360844/6bb3c1/5aa77489Nfdaab5de.png" alt="">
+        </a>
+    </li><li>
+        <a href="javascript:;">
+            <img src="//img30.360buyimg.com/jr_image/jfs/t19516/223/781144421/591637/1270f136/5aa783b5N0b99c2cc.png" alt="">
+        </a>
+    </li></ul>
+    <div class="Con-patten-btn clearfix">
+        <a href="javascript:;" class="Con-pat-left"></a>
+        <a href="javascript:;" class="Con-pat-right"></a>
+    </div>
+    <div class="Con-mt-num">
+        <span class="mt-num">1</span><span>/</span><span class="nums"></span>
+    </div>
+</div>
+
+<script>
+
+    fadeImg({
+        oContainer : $('.Con-main'),
+        oContent : $('.Con-ul'),
+        oArrowLeft : $('.Con-pat-left'),
+        oArrowRight : $('.Con-pat-right')
+    });
+    function fadeImg(opt){
+        var oContainer = opt.oContainer;
+        var oContent = opt.oContent;
+        var aDivs = oContent.find('li');
+        var iLength = aDivs.length;
+        var oneWidth = aDivs.width();
+        var oArrowLeft = opt.oArrowLeft;
+        var oArrowRight = opt.oArrowRight;
+        var mbNum = $(".Con-mt-num .mt-num");
+        var bothLength = $(".Con-mt-num .nums");
+        var index = 0;
+        var timer;
+        var MaxIndex = oContent.find('li').length - 1;
+        bothLength.text(MaxIndex+1);
+        aDivs.each(function(){
+            $(this).data('index',$(this).index());
+        });
+        oContent.css({
+            width : iLength*oneWidth
+        });
+        function goLeft(idx){
+            oContent.stop().animate({
+                'left' : -oneWidth
+            },function(){
+                oContent.css({left : 0}).find('li').eq(0).appendTo(oContent);
+                mbNum.text(idx+1);
+            });
+        }
+        function goRight(idx){
+            oContent.css({left : -oneWidth}).find('li').eq(iLength - 1).prependTo(oContent);
+            oContent.stop().animate({
+                'left' : 0
+            },function(){
+                mbNum.text(idx+1);
+
+            });
+        }
+        function start(){
+            timer = setInterval(function(){
+                oArrowRight.trigger('click');
+            },4000);
+        }
+        oArrowLeft.on('click',function(){
+            if(!oContent.is(":animated")){
+                index--;
+                if(index < 0){
+                    index = iLength - 1;
+                }
+                goRight(index);
+            }
+        });
+        oArrowRight.on('click',function(){
+            if(!oContent.is(":animated")) {
+                index++;
+                if(index >= iLength){
+                    index = 0;
+                }
+                goLeft(index);
+            }
+        });
+        oContent.hover(function(){
+            clearInterval(timer);
+        },function(){
+            start();
+        });
+        $(".Con-patten-btn").hover(function(){
+            clearInterval(timer);
+        },function(){
+            start();
+        });
+        start();
+    }
+
+
+
+
+</script>
+
+</body>
+</html>
