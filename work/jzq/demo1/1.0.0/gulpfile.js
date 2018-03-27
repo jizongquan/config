@@ -23,7 +23,7 @@ var projectConfig = {
     // 项目名称
     name: 'demo1.0.0',
     // 项目开发者
-    author: 'jizongquan@jd.com',
+    author: 'jizongquan',
     // 是否自动发布
     isAutoRelease: true,
     // 发布目录路径
@@ -35,10 +35,9 @@ var projectConfig = {
     // CDN路径
     cdnPath: 'root/www/demo/view/',
     //ftp信息
-    ftpHost: "39.106.36.140",
-    user: "root",
-    pwd: "JZQjzq@909216",
-    //path: "finance/consumer/baitiao/index/",
+    ftpHost: "",
+    user: "",
+    pwd: "",
     // demo路径
     demoPath: "root/www/demo/view/",
     // 测试服务器路径
