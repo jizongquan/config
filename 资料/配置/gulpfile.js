@@ -21,9 +21,9 @@ var ftp = require('vinyl-ftp');    //github：https://github.com/morris/vinyl-ft
  */
 var projectConfig = {
     // 项目名称
-    name: '金融商户中心1.0.0',
+    name: '',
     // 项目开发者
-    author: 'zuoshilong@jd.com',
+    author: '',
     // 是否自动发布
     isAutoRelease: true,
     // 发布目录路径
@@ -35,9 +35,9 @@ var projectConfig = {
     // CDN路径
     cdnPath: '//static.360buyimg.com/',
     //ftp信息
-    ftpHost: "192.168.146.74",
-    user: "www",
-    pwd: "www",
+    ftpHost: "",
+    user: "",
+    pwd: "",
     //path: "finance/consumer/baitiao/index/",
     // demo路径
     demoPath: "var/www/demo.jr.jd.com/",
